@@ -1,0 +1,20 @@
+{
+	"name": "trpc-examples",
+	"private": true,
+	"scripts": {
+		"dev": "bun run --watch app/server.ts"
+	},
+	"dependencies": {
+		"@tanstack/react-query": "5.66.9",
+		"@trpc/client": "next",
+		"@trpc/react-query": "next",
+		"@trpc/server": "next",
+		"@trpc/tanstack-react-query": "next",
+		"@types/react": "^19.0.10",
+		"@types/react-dom": "^19.0.4",
+		"bun-types": "canary",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"typescript": "^5.7.3"
+	}
+}

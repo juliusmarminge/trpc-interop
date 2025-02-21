@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"lib": ["es2023", "dom"],
+		"module": "node16",
+		"target": "es2022",
+		"jsx": "preserve",
+
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"moduleResolution": "node16",
+		"outDir": "dist"
+	},
+	"include": ["**/*.ts", "**/*.tsx"]
+}
