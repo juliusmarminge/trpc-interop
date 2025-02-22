@@ -6,7 +6,9 @@
 		"jsx": "preserve",
 		"strict": true,
 		"skipLibCheck": true,
-		"outDir": "dist"
+		"outDir": "dist",
+		"libReplacement": false,
+		"erasableSyntaxOnly": true
 	},
 	"include": ["**/*.ts", "**/*.tsx"]
 }

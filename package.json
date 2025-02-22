@@ -1,5 +1,5 @@
 {
-	"name": "trpc-examples",
+	"name": "trpc-react-example",
 	"private": true,
 	"scripts": {
 		"dev": "bun run --watch src/server.ts"
@@ -10,11 +10,13 @@
 		"@trpc/react-query": "next",
 		"@trpc/server": "next",
 		"@trpc/tanstack-react-query": "next",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
+	},
+	"devDependencies": {
 		"@types/react": "^19.0.10",
 		"@types/react-dom": "^19.0.4",
 		"bun-types": "canary",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
-		"typescript": "^5.7.3"
+		"typescript": "5.8.1-rc"
 	}
 }
