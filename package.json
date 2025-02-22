@@ -2,7 +2,7 @@
 	"name": "trpc-examples",
 	"private": true,
 	"scripts": {
-		"dev": "bun run --watch app/server.ts"
+		"dev": "bun run --watch src/server.ts"
 	},
 	"dependencies": {
 		"@tanstack/react-query": "5.66.9",

@@ -16,7 +16,7 @@ db.run(`INSERT INTO counters (count) VALUES (0)`);
 
 const appRouter = router({
 	count: publicProcedure.query(() => {
-		const counter = db.query(`SELECT count FROM counters`).get();
+		const counter = db.query(`SELECT count FROM counters where id = 1`).get();
 
 		return counter as { id: number; count: number };
 	}),

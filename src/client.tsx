@@ -1,14 +1,17 @@
-import {
-	QueryClientProvider,
-	useQuery,
-	useQueryClient,
-} from "@tanstack/react-query";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { queryClient, trpcClient, trpcNew, trpcOld } from "./trpc";
+import * as ReactDOMClient from "react-dom/client";
+import * as React from "react";
+import { QueryClientProvider, QueryClient, useQuery } from "@tanstack/react-query";
+import { createTRPCClient, httpBatchLink } from "@trpc/client";
+import { createTRPCReact } from "@trpc/react-query";
+import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
+import type { AppRouter } from "./server";
+
+const queryClient = new QueryClient();
+const trpcClient = createTRPCClient<AppRouter>({ links: [httpBatchLink({ url: "/trpc" })] });
+const trpcNew = createTRPCOptionsProxy<AppRouter>({ client: trpcClient, queryClient });
+const trpcOld = createTRPCReact<AppRouter>();
 
 function Counter() {
-	const queryClient = useQueryClient();
 	const utils = trpcOld.useUtils();
 
 	/**
@@ -48,7 +51,7 @@ function App() {
 	);
 }
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOMClient.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
 		<App />
 	</React.StrictMode>,
