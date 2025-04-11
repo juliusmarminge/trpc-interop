@@ -5,18 +5,19 @@
 		"dev": "bun run --watch src/server.ts"
 	},
 	"dependencies": {
-		"@tanstack/react-query": "5.66.9",
-		"@trpc/client": "next",
-		"@trpc/react-query": "next",
-		"@trpc/server": "next",
-		"@trpc/tanstack-react-query": "next",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
+		"@tanstack/react-query": "5.72.0",
+		"@trpc/client": "^11.1.0",
+		"@trpc/react-query": "^11.1.0",
+		"@trpc/server": "^11.1.0",
+		"@trpc/tanstack-react-query": "^11.1.0",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
+		"zod": "^3.24.2"
 	},
 	"devDependencies": {
 		"@types/react": "^19.0.10",
 		"@types/react-dom": "^19.0.4",
 		"bun-types": "canary",
-		"typescript": "5.8.1-rc"
+		"typescript": "5.8.3"
 	}
 }

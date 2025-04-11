@@ -4,6 +4,7 @@ import { Database } from "bun:sqlite";
 import { initTRPC } from "@trpc/server";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import app from "./index.html";
+import * as z from "zod";
 
 const t = initTRPC.create();
 
@@ -15,14 +16,31 @@ db.run(`CREATE TABLE IF NOT EXISTS counters (id INTEGER PRIMARY KEY AUTOINCREMEN
 db.run(`INSERT INTO counters (count) VALUES (0)`);
 
 const appRouter = router({
-	count: publicProcedure.query(() => {
-		const counter = db.query(`SELECT count FROM counters where id = 1`).get();
+  count: publicProcedure.query(() => {
+    const counter = db.query(`SELECT count FROM counters where id = 1`).get();
 
-		return counter as { id: number; count: number };
-	}),
-	increment: publicProcedure.mutation(() => {
-		db.run("UPDATE counters SET count = count + 1 where id = 1");
-	}),
+    return counter as { id: number; count: number };
+  }),
+  increment: publicProcedure.mutation(() => {
+    db.run("UPDATE counters SET count = count + 1 where id = 1");
+  }),
+
+  upload: publicProcedure
+    .input(
+      z
+        .instanceof(FormData)
+        .transform((fd) => Object.fromEntries(fd.entries()))
+        .pipe(
+          z.object({
+            text: z.string(),
+            fileOne: z.instanceof(File).refine((f) => f.size > 0),
+            fileTwo: z.instanceof(File).optional(),
+          })
+        )
+    )
+    .mutation(({ input }) => {
+      console.log(input);
+    }),
 });
 
 // export only the type definition of the API
@@ -30,17 +48,17 @@ const appRouter = router({
 export type AppRouter = typeof appRouter;
 
 const server = Bun.serve({
-	routes: {
-		"/": app,
-		"/trpc/*": (req) =>
-			fetchRequestHandler({
-				endpoint: "/trpc",
-				req,
-				router: appRouter,
-				createContext: () => ({}),
-			}),
-	},
-	development: true,
+  routes: {
+    "/": app,
+    "/trpc/*": (req) =>
+      fetchRequestHandler({
+        endpoint: "/trpc",
+        req,
+        router: appRouter,
+        createContext: () => ({}),
+      }),
+  },
+  development: true,
 });
 
 console.log(`Listening on ${server.url}`);
